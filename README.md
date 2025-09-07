@@ -1,5 +1,12 @@
 # Exploratory Data Analysis on Layoffs Dataset with SQL
 
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![SQL Database](https://img.shields.io/badge/SQL%20Database-2E8B57?style=for-the-badge&logo=azuredevops&logoColor=white)
+
+[![YouTube](https://img.shields.io/badge/Watch%20on-YouTube-red?logo=youtube)](https://youtu.be/X4ee_lMhEmU)
+[![Connect with me on LinkedIn](https://img.shields.io/badge/Connect%20with%20me-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/md-nafis-al-zamee-a88a9024b)
+
+
 ### 📊 **Project Overview:**  
 This project involves an extensive Exploratory Data Analysis (EDA) on a layoffs dataset covering global companies from 2020 to early 2023. Using clean data prepared from a prior cleaning project, the objective was to uncover meaningful trends and insights on layoffs by company, industry, country, and over time. The analysis was iterative and exploratory, starting simple and progressing to advanced SQL techniques such as window functions and multi-step Common Table Expressions (CTEs).
 
@@ -26,17 +33,17 @@ This project involves an extensive Exploratory Data Analysis (EDA) on a layoffs 
 
 ---
 ### 🛠️🧩 Key Processes Performed:  
-- Examined maximum layoffs in single events  
-- Grouped layoffs by company, industry, country, and year  
-- Extracted and manipulated date fields for monthly and yearly aggregation  
-- Calculated rolling totals to track cumulative layoffs over time  
-- Ranked companies by layoffs per year using window functions and CTEs  
+- **Maximum Layoffs Identification:** Found the largest layoff events and companies with 100% layoffs.  
+- **Aggregate Layoffs by Company:** Summed total layoffs per company to assess overall impact.  
+- **Industry and Country Impact Analysis:** Grouped data to identify which sectors and regions were hardest hit.  
+- **Temporal Trend Analysis:** Used year, month extraction and rolling sums to analyze layoffs progression over time.  
+- **Company-Year Ranking:** Ranked companies annually based on layoffs using window functions and dense ranking for yearly comparison of impact.  
 
 ---
 
 ### 🌟 **Key Features & Methodologies:**
 ---
-1. **Initial Data Exploration and Maximum Layoffs Check:**  
+ **1. Initial Data Exploration and Maximum Layoffs Check:**  
 The analysis began by inspecting the maximum layoffs reported on any single day and identifying companies with total workforce layoffs (100%). This provided context on scale and severity.  
 
 ```sql
@@ -49,7 +56,7 @@ where percentage_laid_off= 1
 order by total_laid_off desc;
 ```
 
-2. **Sorting Companies by Largest Layoffs:**  
+ **2. Sorting Companies by Largest Layoffs:**  
 To identify which companies had the largest single layoffs, data was ordered descending by total layoffs.  
 
 ```sql
@@ -59,7 +66,7 @@ group by company
 order by largest_single_layoff desc;
 ```
 
-3. **Summing Total Layoffs by Company:**  
+ **3. Summing Total Layoffs by Company:**  
 Grouping layoffs by company to get cumulative layoffs over the data period.  
 
 ```sql
@@ -69,7 +76,7 @@ group by company
 order by 2 desc;
 ```
 
-4. **Checking Date Range of Dataset:**  
+ **4. Checking Date Range of Dataset:**  
 Determined the temporal span of the dataset to understand coverage.  
 
 ```sql
@@ -77,7 +84,7 @@ select min(`date`),max(`date`)
 from layoff_staging2;
 ```
 
-5. **Industry-wise Layoffs Aggregation:**  
+ **5. Industry-wise Layoffs Aggregation:**  
 Summed total layoffs by industry to spot hardest hit sectors.  
 
 ```sql
@@ -87,7 +94,7 @@ group by industry
 order by 2 desc;
 ```
 
-6. **Country-wise Layoffs Aggregation:**  
+ **6. Country-wise Layoffs Aggregation:**  
 Identified countries with most layoffs.  
 
 ```sql
@@ -97,7 +104,7 @@ group by country
 order by 2 desc ;
 ```
 
-7. **Yearly Layoffs Aggregation:**  
+ **7. Yearly Layoffs Aggregation:**  
 Extracted year from date and grouped layoffs by year to observe trends over time.  
 
 ```sql
@@ -107,7 +114,7 @@ group by year(`date`)
 order by 2 desc ;
 ```
 
-8. **Stage-wise Layoffs Analysis:**  
+ **8. Stage-wise Layoffs Analysis:**  
 Grouped layoffs by company funding stage to analyze impact across company maturity levels.  
 
 ```sql
@@ -117,7 +124,7 @@ group by stage
 order by 2 desc ;
 ```
 
-9. **Rolling Total Layoffs by Month:**  
+ **9. Rolling Total Layoffs by Month:**  
 Calculated rolling cumulative layoffs month by month using substring extraction of year and month from the date, then applying window functions.  
 
 ```sql
@@ -140,7 +147,7 @@ sum(total_off) over (order by `month`) as Rollin_total
 from Rolling_total;
 ```
 
-10. **Ranking Companies by Yearly Layoffs:**  
+ **10. Ranking Companies by Yearly Layoffs:**  
 Created a multi-CTE query to rank companies by total layoffs per year, filtering for top rankings to highlight most impacted companies annually.  
 
 ```sql
@@ -176,12 +183,15 @@ where ranking<= 5
 - Large tech giants (Google, Meta, Amazon) had repeated layoffs across multiple years.  
 - Several companies underwent complete workforce layoffs **(100%)**, indicating closures.  
 - Rolling totals visualized the steady accumulation and acceleration of layoffs over time.
-   
-- Yearly rankings highlighted top companies by layoffs, facilitating year-over-year comparisons.  
- ![yearly layoff ranking.png.png](yearly%20layoff%20ranking.png.png)
+<img src="rollin total.png" alt="rolling total" width="280"/>
+
+- Yearly rankings highlighted top companies by layoffs, facilitating year-over-year comparisons.
+  
+ <img src="yearly layoff ranking.png.png" alt="yearly layoff ranking" width="300"/>
+ 
 ---
 
-🏆 **Best Practices Followed:**  
+### 🏆 **•Best Practices Followed:**  
 - Started analysis on clean, reliable data ensuring accurate insights.  
 - Leveraged SQL analytical functions efficiently for deep exploratory analysis.  
 - Documented each analytical step with corresponding SQL code for reproducibility.  
@@ -201,20 +211,8 @@ where ranking<= 5
 
 ---
 
-### **• Key Analyses Performed:**  
-- **Maximum Layoffs Identification:** Found the largest layoff events and companies with 100% layoffs.  
-- **Aggregate Layoffs by Company:** Summed total layoffs per company to assess overall impact.  
-- **Industry and Country Impact Analysis:** Grouped data to identify which sectors and regions were hardest hit.  
-- **Temporal Trend Analysis:** Used year, month extraction and rolling sums to analyze layoffs progression over time.  
-- **Company-Year Ranking:** Ranked companies annually based on layoffs using window functions and dense ranking for yearly comparison of impact.  
-
-
-
-
----
-
 📄 **Summary:**  
-By combining data cleaning with robust exploratory queries, this project presents a comprehensive analysis of layoffs from 2020-2023. It highlights notable patterns in layoffs across geographies, industries, and company stages, supported by detailed SQL code for reproducibility. This project serves as a strong portfolio example illustrating proficiency in SQL, critical thinking, and data storytelling—valuable assets for any data analyst or data engineer role.
+By combining data cleaning with robust exploratory queries, this project presents a comprehensive analysis of layoffs from 2020-2023. It highlights notable patterns in layoffs across geographies, industries, and company stages, supported by detailed SQL code for reproducibility. 
 
 ---
 
