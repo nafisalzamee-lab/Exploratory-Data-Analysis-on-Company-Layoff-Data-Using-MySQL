@@ -1,4 +1,4 @@
-# Exploratory Data Analysis on Layoffs Dataset with SQL
+# Exploratory Data Analysis on Layoffs Dataset with MySQL
 
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![SQL Database](https://img.shields.io/badge/SQL%20Database-2E8B57?style=for-the-badge&logo=azuredevops&logoColor=white)
@@ -191,7 +191,7 @@ where ranking<= 5
  
 ---
 
-### 🏆 **•Best Practices Followed:**  
+### **•🏆Best Practices Followed:**  
 - Started analysis on clean, reliable data ensuring accurate insights.  
 - Leveraged SQL analytical functions efficiently for deep exploratory analysis.  
 - Documented each analytical step with corresponding SQL code for reproducibility.  
