@@ -1,3 +1,6 @@
+### ** Exploratory Data Analysis on Layoffs Dataset with SQL**
+
+---
 
 📊 **Project Overview:**  
 This project involves an extensive Exploratory Data Analysis (EDA) on a layoffs dataset covering global companies from 2020 to early 2023. Using clean data prepared from a prior cleaning project, the objective was to uncover meaningful trends and insights on layoffs by company, industry, country, and over time. The analysis was iterative and exploratory, starting simple and progressing to advanced SQL techniques such as window functions and multi-step Common Table Expressions (CTEs).
