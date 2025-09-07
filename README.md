@@ -1,13 +1,6 @@
-###  Exploratory Data Analysis on Layoffs Dataset with SQL
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![SQL Database](https://img.shields.io/badge/SQL%20Database-2E8B57?style=for-the-badge&logo=azuredevops&logoColor=white)
+# Exploratory Data Analysis on Layoffs Dataset with SQL
 
-[![YouTube](https://img.shields.io/badge/Watch%20on-YouTube-red?logo=youtube)](https://youtu.be/X4ee_lMhEmU)
-[![Connect with me on LinkedIn](https://img.shields.io/badge/Connect%20with%20me-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/md-nafis-al-zamee-a88a9024b)
-
----
-
-📊 **Project Overview:**  
+### 📊 **Project Overview:**  
 This project involves an extensive Exploratory Data Analysis (EDA) on a layoffs dataset covering global companies from 2020 to early 2023. Using clean data prepared from a prior cleaning project, the objective was to uncover meaningful trends and insights on layoffs by company, industry, country, and over time. The analysis was iterative and exploratory, starting simple and progressing to advanced SQL techniques such as window functions and multi-step Common Table Expressions (CTEs).
 
 ---
@@ -41,7 +34,8 @@ This project involves an extensive Exploratory Data Analysis (EDA) on a layoffs 
 
 ---
 
-🌟 **Key Features & Methodologies:**
+### 🌟 **Key Features & Methodologies:**
+---
 1. **Initial Data Exploration and Maximum Layoffs Check:**  
 The analysis began by inspecting the maximum layoffs reported on any single day and identifying companies with total workforce layoffs (100%). This provided context on scale and severity.  
 
@@ -159,7 +153,7 @@ SELECT * FROM company_year_ranked WHERE ranking &lt;= 5 ORDER BY year, ranking;
 
 ---
 
-🔍 **Key Findings and Insights:**  
+### 🔍 **Key Findings and Insights:**  
 - Layoffs peaked in 2022, with early 2023 showing rising trends despite only three months of data.  
 - The United States and India had the highest layoffs by volume.  
 - Consumer retail and tech industries bore the brunt of layoffs.  
@@ -211,5 +205,3 @@ If you want to see the whole SQL script Click [**Here**](https://github.com/nafi
 
 
 [![Connect with me on LinkedIn](https://img.shields.io/badge/Connect%20with%20me-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/md-nafis-al-zamee-a88a9024b)
-
-
