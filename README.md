@@ -1,4 +1,4 @@
-### ** Exploratory Data Analysis on Layoffs Dataset with SQL**
+###  Exploratory Data Analysis on Layoffs Dataset with SQL
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![SQL Database](https://img.shields.io/badge/SQL%20Database-2E8B57?style=for-the-badge&logo=azuredevops&logoColor=white)
 
@@ -32,9 +32,16 @@ This project involves an extensive Exploratory Data Analysis (EDA) on a layoffs 
 - Layoff event dates  
 
 ---
+### 🛠️🧩 Key Processes Performed:  
+- Examined maximum layoffs in single events  
+- Grouped layoffs by company, industry, country, and year  
+- Extracted and manipulated date fields for monthly and yearly aggregation  
+- Calculated rolling totals to track cumulative layoffs over time  
+- Ranked companies by layoffs per year using window functions and CTEs  
 
-🛠️🧩 **Key Processes Performed:**
+---
 
+🌟 **Key Features & Methodologies:**
 1. **Initial Data Exploration and Maximum Layoffs Check:**  
 The analysis began by inspecting the maximum layoffs reported on any single day and identifying companies with total workforce layoffs (100%). This provided context on scale and severity.  
 
@@ -152,15 +159,6 @@ SELECT * FROM company_year_ranked WHERE ranking &lt;= 5 ORDER BY year, ranking;
 
 ---
 
-🌟 **Key Features &amp; Methodologies:**  
-- Employed SQL window functions like `SUM() OVER` and `DENSE_RANK() OVER` for cumulative sums and rankings.  
-- Utilized substring manipulation to extract year-month for time series grouping.  
-- Multi-level CTEs to organize complex ranking queries clearly.  
-- Iterative approach: starting from simple aggregations, moving to advanced ranking and rolling totals.  
-- Balanced qualitative assessment (company recognition, industry impact) with quantitative analysis.  
-
----
-
 🔍 **Key Findings and Insights:**  
 - Layoffs peaked in 2022, with early 2023 showing rising trends despite only three months of data.  
 - The United States and India had the highest layoffs by volume.  
@@ -182,8 +180,25 @@ SELECT * FROM company_year_ranked WHERE ranking &lt;= 5 ORDER BY year, ranking;
 
 ---
 
-🎯 **Project Outcome:**  
-This project successfully demonstrated advanced SQL skills applied to exploratory data analysis on a complex layoffs dataset. It yielded actionable insights about workforce reductions across companies, industries, and regions during a critical economic period. The layered querying approach, from aggregate summaries to rolling totals and ranking, exemplifies practical data analysis applicable in real-world business intelligence and research scenarios.  
+ ### **•🎯Project Outcome:**  
+- Delivered deep insights into layoffs trends from 2020 to 2023, highlighting peak years and most affected regions and industries.  
+- Demonstrated proficiency in advanced SQL techniques such as window functions, CTEs, and substring operations.  
+- Provided a replicable, expandable SQL framework for analyzing complex real-world datasets.  
+- Produced actionable findings useful for economic research, workforce planning, or business intelligence.  
+- Created a strong portfolio piece showcasing data exploration skills and SQL expertise, ready to impress recruiters and stakeholders.  
+ 
+
+---
+
+### **• Key Analyses Performed:**  
+- **Maximum Layoffs Identification:** Found the largest layoff events and companies with 100% layoffs.  
+- **Aggregate Layoffs by Company:** Summed total layoffs per company to assess overall impact.  
+- **Industry and Country Impact Analysis:** Grouped data to identify which sectors and regions were hardest hit.  
+- **Temporal Trend Analysis:** Used year, month extraction and rolling sums to analyze layoffs progression over time.  
+- **Company-Year Ranking:** Ranked companies annually based on layoffs using window functions and dense ranking for yearly comparison of impact.  
+
+
+
 
 ---
 
@@ -192,7 +207,7 @@ By combining data cleaning with robust exploratory queries, this project present
 
 ---
 
-If you want to see the whole SQL script Click [**Here**](https://github.com/nafisalzamee-lab/Data-Cleaning-and-Preparation-of-Global-Layoffs-Dataset-Using-MySQL/blob/main/SQL%20Script%20of%20Data%20Cleaning%20%26%20Preparation%20Using%20MySQL.sql)
+If you want to see the whole SQL script Click [**Here**](https://github.com/nafisalzamee-lab/Exploratory-Data-Analysis-on-Company-Layoff-Data-Using-MySQL/blob/main/SQL%20Script%20of%20EDA%20project.sql)
 
 
 [![Connect with me on LinkedIn](https://img.shields.io/badge/Connect%20with%20me-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/md-nafis-al-zamee-a88a9024b)
