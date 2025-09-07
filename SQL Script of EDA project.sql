@@ -8,9 +8,10 @@ from layoff_staging2
 where percentage_laid_off= 1
 order by total_laid_off  desc;
 
-select company, total_laid_off 
+select company, sum(total_laid_off)
 from layoff_staging2
-order by total_laid_off  desc;
+group by company
+order by 2 desc;
 
 select company, sum(total_laid_off)
 from layoff_staging2
@@ -44,12 +45,12 @@ select stage, sum(total_laid_off)
 from layoff_staging2
 group by stage
 order by 2 desc ;
-
+---
 select company, avg(percentage_laid_off)
 from layoff_staging2
 group by company
 order by 2 desc ;
-
+---
 select substring(`date`,1,7) as `Month`, sum(total_laid_off)
 from layoff_staging2
 where substring(`date`,1,7) is not null
