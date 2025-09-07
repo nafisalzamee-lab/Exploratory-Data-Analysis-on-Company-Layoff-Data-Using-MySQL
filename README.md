@@ -1,4 +1,9 @@
 ### ** Exploratory Data Analysis on Layoffs Dataset with SQL**
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![SQL Database](https://img.shields.io/badge/SQL%20Database-2E8B57?style=for-the-badge&logo=azuredevops&logoColor=white)
+
+[![YouTube](https://img.shields.io/badge/Watch%20on-YouTube-red?logo=youtube)](https://youtu.be/X4ee_lMhEmU)
+[![Connect with me on LinkedIn](https://img.shields.io/badge/Connect%20with%20me-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/md-nafis-al-zamee-a88a9024b)
 
 ---
 
@@ -187,5 +192,9 @@ By combining data cleaning with robust exploratory queries, this project present
 
 ---
 
+If you want to see the whole SQL script Click [**Here**](https://github.com/nafisalzamee-lab/Data-Cleaning-and-Preparation-of-Global-Layoffs-Dataset-Using-MySQL/blob/main/SQL%20Script%20of%20Data%20Cleaning%20%26%20Preparation%20Using%20MySQL.sql)
+
+
+[![Connect with me on LinkedIn](https://img.shields.io/badge/Connect%20with%20me-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/md-nafis-al-zamee-a88a9024b)
 
 
