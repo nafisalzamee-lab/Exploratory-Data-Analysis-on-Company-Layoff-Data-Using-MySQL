@@ -40,128 +40,145 @@ This project involves an extensive Exploratory Data Analysis (EDA) on a layoffs 
 The analysis began by inspecting the maximum layoffs reported on any single day and identifying companies with total workforce layoffs (100%). This provided context on scale and severity.  
 
 ```sql
-SELECT MAX(total_laid_off) FROM layoffs;
-SELECT MAX(percentage_laid_off) FROM layoffs;
-SELECT * FROM layoffs WHERE percentage_laid_off = 1;
+select max(total_laid_off),max(percentage_laid_off)
+from layoff_staging2;
+
+select *
+from layoff_staging2
+where percentage_laid_off= 1
+order by total_laid_off desc;
 ```
 
 2. **Sorting Companies by Largest Layoffs:**  
 To identify which companies had the largest single layoffs, data was ordered descending by total layoffs.  
 
 ```sql
-SELECT * FROM layoffs ORDER BY total_laid_off DESC;
+select company, max(total_laid_off) as largest_single_layoff
+from layoff_staging2
+group by company
+order by largest_single_layoff desc;
 ```
 
 3. **Summing Total Layoffs by Company:**  
 Grouping layoffs by company to get cumulative layoffs over the data period.  
 
 ```sql
-SELECT company, SUM(total_laid_off) AS total_laid_off_sum 
-FROM layoffs 
-GROUP BY company 
-ORDER BY total_laid_off_sum DESC;
+select company, sum(total_laid_off)
+from layoff_staging2
+group by company
+order by 2 desc;
 ```
 
 4. **Checking Date Range of Dataset:**  
 Determined the temporal span of the dataset to understand coverage.  
 
 ```sql
-SELECT MIN(date), MAX(date) FROM layoffs;
+select min(`date`),max(`date`)
+from layoff_staging2;
 ```
 
 5. **Industry-wise Layoffs Aggregation:**  
 Summed total layoffs by industry to spot hardest hit sectors.  
 
 ```sql
-SELECT industry, SUM(total_laid_off) AS total_laid_off_sum 
-FROM layoffs 
-GROUP BY industry 
-ORDER BY total_laid_off_sum DESC;
+select industry, sum(total_laid_off)
+from layoff_staging2
+group by industry
+order by 2 desc;
 ```
 
 6. **Country-wise Layoffs Aggregation:**  
 Identified countries with most layoffs.  
 
 ```sql
-SELECT country, SUM(total_laid_off) AS total_laid_off_sum 
-FROM layoffs 
-GROUP BY country 
-ORDER BY total_laid_off_sum DESC;
+select country, sum(total_laid_off)
+from layoff_staging2
+group by country
+order by 2 desc ;
 ```
 
 7. **Yearly Layoffs Aggregation:**  
 Extracted year from date and grouped layoffs by year to observe trends over time.  
 
 ```sql
-SELECT YEAR(date) AS year, SUM(total_laid_off) AS total_laid_off_sum 
-FROM layoffs 
-GROUP BY year 
-ORDER BY year;
+select year(`date`), sum(total_laid_off)
+from layoff_staging2
+group by year(`date`)
+order by 2 desc ;
 ```
 
 8. **Stage-wise Layoffs Analysis:**  
 Grouped layoffs by company funding stage to analyze impact across company maturity levels.  
 
 ```sql
-SELECT stage, SUM(total_laid_off) AS total_laid_off_sum 
-FROM layoffs 
-GROUP BY stage 
-ORDER BY total_laid_off_sum DESC;
+select stage, sum(total_laid_off)
+from layoff_staging2
+group by stage
+order by 2 desc ;
 ```
 
 9. **Rolling Total Layoffs by Month:**  
 Calculated rolling cumulative layoffs month by month using substring extraction of year and month from the date, then applying window functions.  
 
 ```sql
-WITH monthly_layoffs AS (
-  SELECT 
-    SUBSTRING(date, 1, 7) AS year_month,
-    SUM(total_laid_off) AS total_laid_off_sum
-  FROM layoffs
-  GROUP BY year_month
+select substring(`date`,1,7) as `Month`, sum(total_laid_off)
+from layoff_staging2
+where substring(`date`,1,7) is not null
+Group by `Month`
+order by 1 asc;
+
+with Rolling_total as
+(
+select substring(`date`,1,7) as `Month`, sum(total_laid_off) as total_off
+from layoff_staging2
+where substring(`date`,1,7) is not null
+Group by `Month`
+order by 1 asc
 )
-SELECT 
-  year_month,
-  total_laid_off_sum,
-  SUM(total_laid_off_sum) OVER (ORDER BY year_month) AS rolling_total
-FROM monthly_layoffs
-ORDER BY year_month;
+select `month`, total_off,
+sum(total_off) over (order by `month`) as Rollin_total
+from Rolling_total;
 ```
 
 10. **Ranking Companies by Yearly Layoffs:**  
 Created a multi-CTE query to rank companies by total layoffs per year, filtering for top rankings to highlight most impacted companies annually.  
 
 ```sql
-WITH company_year AS (
-  SELECT 
-    company,
-    YEAR(date) AS year,
-    SUM(total_laid_off) AS total_laid_off_sum
-  FROM layoffs
-  GROUP BY company, year
-),
-company_year_ranked AS (
-  SELECT 
-    company,
-    year,
-    total_laid_off_sum,
-    DENSE_RANK() OVER (PARTITION BY year ORDER BY total_laid_off_sum DESC) AS ranking
-  FROM company_year
-)
-SELECT * FROM company_year_ranked WHERE ranking &lt;= 5 ORDER BY year, ranking;
+select company, year(`date`), sum(total_laid_off)
+from layoff_staging2
+group by company, year(`date`)
+order by company asc;
+
+with company_year (company, years, total_laid_off) as 
+(
+select company, year(`date`) as years, sum(total_laid_off)
+from layoff_staging2
+group by company, year(`date`)
+), 
+Company_year_rank as
+(select*,
+dense_rank() over(partition by years order by total_laid_off desc) as ranking
+from company_year
+where years is not null)
+select*
+from company_year_rank
+where ranking<= 5
 ```
 
 ---
 
 ### 🔍 **Key Findings and Insights:**  
-- Layoffs peaked in 2022, with early 2023 showing rising trends despite only three months of data.  
-- The United States and India had the highest layoffs by volume.  
-- Consumer retail and tech industries bore the brunt of layoffs.  
+- Layoffs peaked in **2022** llikely due to Covid, with early 2023 showing rising trends despite only three months of data.  
+- The **United States** and **India** had the highest layoffs by volume.  
+- **Consumer retail** and **tech** industries bore the brunt of layoffs.
+- Tech giant **Amazon** had the highest total layoffs among all companies during the tenure of March 2020 to March 2023.
+- **Google** had the largest single lay off among companies.
 - Large tech giants (Google, Meta, Amazon) had repeated layoffs across multiple years.  
-- Several companies underwent complete workforce layoffs (100%), indicating closures.  
-- Rolling totals visualized the steady accumulation and acceleration of layoffs over time.  
+- Several companies underwent complete workforce layoffs **(100%)**, indicating closures.  
+- Rolling totals visualized the steady accumulation and acceleration of layoffs over time.
+   
 - Yearly rankings highlighted top companies by layoffs, facilitating year-over-year comparisons.  
-
+ ![yearly layoff ranking.png.png](yearly%20layoff%20ranking.png.png)
 ---
 
 🏆 **Best Practices Followed:**  
